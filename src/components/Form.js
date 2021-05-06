@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 function Form() {
   const people = ["Máma", "Táta", "Kuba", "Matěj", "zatím nikdo"];
   const week = useSelector((state) => state.meta.week);
-  const todos = useSelector((state) => (week ? state.week : state.season));
+  const todos = useSelector((state) => (week ? state.week : state.season).filter(todo=>!todo.deleted));
 
   const peopleList = people.map((person) => (
     <th className="radioContainer" key={person}>

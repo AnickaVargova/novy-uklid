@@ -17,8 +17,8 @@ function Person(props) {
 
   const cinnosti = (week
     ? [...cinnostiTyden, ...seasonTodoToday]
-    : cinnostiPololeti.filter((todo) => !todo.tyden)
-  ).filter((todo) => todo.who === props.name && !todo.completed);
+    : cinnostiPololeti.filter((todo) => !todo.tyden && !todo.doToday)
+  ).filter((todo) => todo.who === props.name && !todo.completed  );
 
   const theme = useSelector((state) => state.theme);
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ function Person(props) {
             onChange={() => {
               dispatch({ type: "COMPLETE", payload: todo.name });
               dispatch({ type: "DONE", payload: true });
-              dispatch(saveWeekOrSeason());
+              dispatch(saveWeekOrSeason(todo.name));
             }}
             type="checkbox"
           ></input>
@@ -45,7 +45,7 @@ function Person(props) {
             checked={todo.tyden}
             onChange={() => {
               dispatch({ type: "DO_TODAY", payload: todo.name });
-              dispatch(saveWeekOrSeason());
+              dispatch(saveWeekOrSeason(todo.name));
             }}
             type="checkbox"
           ></input>

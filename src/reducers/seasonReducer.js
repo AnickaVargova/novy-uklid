@@ -1,5 +1,5 @@
 export const getSeason = () => (dispatch) => {
-  fetch(`http://localhost:3001/pololeti`)
+  fetch(`http://localhost:8081/pololeti`)
     .then((response) => response.json())
     .then((data) => {
       dispatch({ type: "GET_SEASON", payload: data });
@@ -8,7 +8,7 @@ export const getSeason = () => (dispatch) => {
 };
 
 export const getCurrentSeason = () => (dispatch) => {
-  fetch(`http://localhost:3001/pololetiAktualni`)
+  fetch(`http://localhost:8081/pololetiAktualni`)
     .then((response) => response.json())
     .then((data) => {
       dispatch({ type: "GET_SEASON", payload: data });
@@ -16,11 +16,11 @@ export const getCurrentSeason = () => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export const saveSeason = () => (dispatch, getState) => {
-  fetch(`http://localhost:3001/pololetiAktualni`, {
+export const saveSeason = (name) => (dispatch, getState) => {
+  fetch(`http://localhost:8081/pololetiAktualni`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(getState().season),
+    body: JSON.stringify(getState().season.find(todo=>todo.name === name)),
   })
     .then((response) => response.json)
     .catch((error) => console.log(error));

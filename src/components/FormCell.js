@@ -27,7 +27,7 @@ function FormCell(props) {
             type: "ASSIGN",
             payload: { taskName: props.todo.name, who: person },
           });
-          dispatch(saveWeekOrSeason());
+          dispatch(saveWeekOrSeason(props.todo.name));
         }}
         disabled={props.todo.completed}
       ></input>
@@ -41,7 +41,7 @@ function FormCell(props) {
           className="cancel"
           onClick={() => {
             dispatch({ type: "DELETE", payload: props.todo.name });
-            dispatch(saveWeekOrSeason());
+            dispatch(saveWeekOrSeason(props.todo.name));
           }}
           data-testid="delete"
         >
